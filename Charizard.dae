@@ -5,8 +5,8 @@
       <author>Blender User</author>
       <authoring_tool>Blender 2.74.0 commit date:2015-03-31, commit time:13:39, hash:000dfc0</authoring_tool>
     </contributor>
-    <created>2015-04-17T22:38:58</created>
-    <modified>2015-04-17T22:38:58</modified>
+    <created>2015-04-17T23:18:26</created>
+    <modified>2015-04-17T23:18:26</modified>
     <unit name="meter" meter="1"/>
     <up_axis>Z_UP</up_axis>
   </asset>
@@ -1069,9 +1069,7 @@
           <skeleton>#Bone_005</skeleton>
           <bind_material>
             <technique_common>
-              <instance_material symbol="mat1-material" target="#mat1-material">
-                <bind_vertex_input semantic="polygon1-mesh-map-0" input_semantic="TEXCOORD" input_set="0"/>
-              </instance_material>
+              <instance_material symbol="mat1-material" target="#mat1-material"/>
             </technique_common>
           </bind_material>
         </instance_controller>
