@@ -1,29 +1,33 @@
 ﻿#pragma strict
 
-var List<Pokemon> pokemons;
+var pokemons;
 var playing : boolean; 
 var players = [];
 
 static function Start () {
 	playing = false;
+	pokemons = initPokemon();
 	NetworkManager.init();
 }
 
 static function addPlayer(player: Player)
 {
  	players.push(player);
- 	player.addPersonalPokemon(new Pokemon("Golem", [], "Rock"));
+ 	player.addPersonalPokemon(pokemons["golem"]);
 }
 
 static function addPersonalPokemon(pokemon : Pokemon)
 {
+	
 	player.assignPokemon(pokmeon);
 }
 static function startPlay()
 {
 	playing = true;
 }
-	
+static function getPlayers(){
+	return players;
+}
 static function Update () {
 	if(!playing)
 		return;

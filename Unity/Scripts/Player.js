@@ -3,6 +3,7 @@
 var life = 100;
 var speed = 1;
 var pokemon;
+
 function Start () {
 	GameManager.addPlayer(this);
 }
@@ -10,26 +11,23 @@ function Start () {
 
 function checkMovements()
 {
+	var players = getPlayers();
+	players.remove(this);
 	if(Input.GetKey(KeyCode.W))
-		move(0);
+		pokemon.move(0, players[0]);
 		
     if(Input.GetKey(KeyCode.A))
-    	move(1);
+    	pokemon.move(1, player[0]);
 
     if(Input.GetKey(KeyCode.S))
-    	move(2);
+    	pokemon.move(2, player[0]);
 
     if(Input.GetKey(KeyCode.D))
-    	move(3);
+    	pokemon.move(3, player[0]);
 }
 
 function assignPokemon(pokemon: Pokemon)
 {
 	this.pokemon = pokemon;
-}
-
-function move(int id)
-{
-	var animationComp : Animation;
-	animationComp.Play(pokemon.moveList[id].name);	
+	// CREATE THE POKEMON
 }
