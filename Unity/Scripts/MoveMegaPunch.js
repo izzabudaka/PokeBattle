@@ -1,0 +1,1 @@
+var MoveMegaPunch = new doAction("mega punch", 60);

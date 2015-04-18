@@ -1,31 +1,28 @@
-﻿#pragma strict
-
-function initPokemon(){
-	var pokemon = new Array();
-	var moves = new Array();
+﻿static function initPokemon(){
+	var pokemon = {};
+	var moves = {};
 	
-	moves["rollout"] = new MoveRollout();
-	moves["mega punch"] = new MoveMegaPunch();
-	moves["earthquake"] = new MoveEarthquake();
-	moves["slash"] = new MoveSlash();
-	moves["aura sphere"] = new MoveAura();
+	moves["rollout"] = new doAction("rollout", 60);
+	moves["mega punch"] = new doAction("mega punch", 60);
+	moves["earthquake"] = new doAction("earthquake", 100);
+	moves["slash"] = new doAction("slash", 70);
+	moves["aura sphere"] = new doAction("aura sphere", 60);
 
 	pokemon["charizard"] = new Pokemon(
-		"Charizard", 
-		new Array(
-			moves["slash"]),
+		"Charizard",
+		[moves["slash"]],
 		"Fire");
 	pokemon["golem"] = new Pokemon(
 		"Golem", 
-		new Array(
+		[
 			moves["rollout"],
 			moves["mega punch"],
-			moves["earthquake"]),
+			moves["earthquake"]],
 		"Rock");
 	pokemon["lucario"] = new Pokemon(
 		"Lucario", 
-		new Array(
-			moves["aura sphere"]),
+		[
+			moves["aura sphere"]],
 		"fighting");
 		
 	return pokemon;

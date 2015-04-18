@@ -1,8 +1,6 @@
-﻿#pragma strict
-
-var life = 100;
+﻿var life = 100;
 var speed = 1;
-var pokemon;
+var pokemon : Pokemon;
 
 function Start () {
 	GameManager.addPlayer(this);
@@ -11,19 +9,19 @@ function Start () {
 
 function checkMovements()
 {
-	var players = getPlayers();
+	var players = GameManager.getPlayers();
 	players.remove(this);
 	if(Input.GetKey(KeyCode.W))
 		pokemon.move(0, players[0]);
 		
     if(Input.GetKey(KeyCode.A))
-    	pokemon.move(1, player[0]);
+    	pokemon.move(1, players[0]);
 
     if(Input.GetKey(KeyCode.S))
-    	pokemon.move(2, player[0]);
+    	pokemon.move(2, players[0]);
 
     if(Input.GetKey(KeyCode.D))
-    	pokemon.move(3, player[0]);
+    	pokemon.move(3, players[0]);
 }
 
 function assignPokemon(pokemon: Pokemon)

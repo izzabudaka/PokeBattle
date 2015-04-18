@@ -1,25 +1,23 @@
-﻿#pragma strict
-
-var pokemons;
-var playing : boolean; 
-var players = [];
+﻿
+static var pokemons = {};
+static var playing : boolean; 
+static var players : Player[] = [];
 
 static function Start () {
 	playing = false;
-	pokemons = initPokemon();
+	pokemons = PokemonData.initPokemon();
 	NetworkManager.init();
 }
 
 static function addPlayer(player: Player)
 {
  	players.push(player);
- 	player.addPersonalPokemon(pokemons["golem"]);
+ 	player.assignPokemon(pokemons["golem"]);
 }
 
-static function addPersonalPokemon(pokemon : Pokemon)
-{
-	
-	player.assignPokemon(pokmeon);
+static function addPersonalPokemon(player: Player, pokemon : Pokemon)
+{	
+	player.assignPokemon(pokemon);
 }
 static function startPlay()
 {
@@ -31,7 +29,6 @@ static function getPlayers(){
 static function Update () {
 	if(!playing)
 		return;
-	players.forEach(function(player) {
-		player.checkMovements(); // players = list players curr in the game
-	}
+	for(i = 0; i < players.length; i++)
+		players[i].checkMovements();
 }
