@@ -7,7 +7,7 @@ var refreshing : boolean = false;
 var hostData : HostData[];
 var readyToPlay: boolean = false; 
 
-function init () {
+static function init () {
 
   Debug.Log("calling init");
   if(!Network.isClient && !Network.isServer) {
@@ -25,7 +25,7 @@ function init () {
 }
  
  
-function Update () {
+static function Update () {
 
  	if(!readyToPlay) {
  		return;
@@ -34,7 +34,7 @@ function Update () {
 }
  
  
-function startServer () {
+static function startServer () {
  
         Network.InitializeServer(32,25001, !Network.HavePublicAddress);
         MasterServer.RegisterHost(gameName, typeName, " this is some comment");
@@ -43,7 +43,7 @@ function startServer () {
        
        
        
-function OnServerInitialized () {
+static function OnServerInitialized () {
  
         Debug.Log("server initialized");
         spawnPlayer();
@@ -51,20 +51,20 @@ function OnServerInitialized () {
        
 }
  
-function OnConnectedToServer () {
+static function OnConnectedToServer () {
  
         spawnPlayer();
  		readyToPlay = true;
  
 }
  
-function spawnPlayer () {
+static function spawnPlayer () {
  
         Network.Instantiate(playerPrefab, spawnObject.position, Quaternion.identity, 0);
  
 }
  
-function OnMasterServerEvent(mse:MasterServerEvent) {
+static function OnMasterServerEvent(mse:MasterServerEvent) {
  
         if(mse == MasterServerEvent.RegistrationSucceeded) {
           Debug.Log("Registered Server");
@@ -73,14 +73,14 @@ function OnMasterServerEvent(mse:MasterServerEvent) {
        
 }
 
-function OnFailedToConnect(error: NetworkConnectionError)
+static function OnFailedToConnect(error: NetworkConnectionError)
 {
   Debug.Log("Could not connect to the server: " + error + ", so I am creating a new server");
   startServer();
 }
        
        
-function getHostList () {
+static function getHostList () {
  
         MasterServer.RequestHostList(gameName);
         yield WaitForSeconds(2);
