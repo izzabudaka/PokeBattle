@@ -3,10 +3,12 @@ static var pokemons = {};
 static var playing : boolean; 
 static var players : Player[] = [];
 
-static function Start () {
+function Start () {
+	Debug.Log("Start of GameManager");
 	playing = false;
 	pokemons = PokemonData.initPokemon();
-	NetworkManager.init();
+	netMng = new NetworkManager();
+	netMng.init();
 }
 
 static function addPlayer(player: Player)
