@@ -32,6 +32,6 @@ static function Update () {
 	if(!playing)
 		return;
 	players.forEach(function(player) {
-		player.checkmovenets(); // players = list players curr in the game
+		player.checkMovements(); // players = list players curr in the game
 	}
 }
