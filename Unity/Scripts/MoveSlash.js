@@ -1,0 +1,1 @@
+var MoveSlash = new doAction("slash", 70);
