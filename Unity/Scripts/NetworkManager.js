@@ -1,17 +1,24 @@
 var playerPrefab : GameObject;
 var spawnObject : Transform;
  
-var typeName : String = "UniqueGameName";
+var typeName : String = "UniquePokeBattleGameName";
 var gameName : String = "PokeBattleRoomName";
 var refreshing : boolean = false;
 var hostData : HostData[];
 var readyToPlay: boolean = false; 
+var data : Data;
 
+function setData(data: Data) {
+	this.data = data;
+}
 function init () {
 
   Debug.Log("calling init");
   //hostData = new Array(10);
   if(!Network.isClient && !Network.isServer) {
+  	
+  	startServer();
+  	
   	
     //connect to a server
     MasterServer.RequestHostList(gameName);
@@ -22,8 +29,7 @@ function init () {
     try {
     	Network.Connect(hostData[0], "");
     }
-    catch(exception)
-    {
+    catch(exception) {
     	Debug.Log("exception is " + exception);
     	startServer();
     }
@@ -63,21 +69,22 @@ function startServer () {
 function OnServerInitialized () {
  
         Debug.Log("server initialized");
-        spawnPlayer();
+        //spawnPlayer();
        
        
 }
  
 function OnConnectedToServer () {
- 
+ 		Debug.Log("Client connected to server");
         spawnPlayer();
  		readyToPlay = true;
  
 }
  
 function spawnPlayer () {
- 
-        Network.Instantiate(playerPrefab, spawnObject.position, Quaternion.identity, 0);
+		Debug.Log("spawnPlayer called");	
+ 		var prefab = data.getPrefab();
+        Network.Instantiate(prefab, spawnObject.position, Quaternion.identity, 0);
  
 }
  
@@ -90,16 +97,32 @@ function OnMasterServerEvent(mse:MasterServerEvent) {
        
 }
 
-function OnFailedToConnect(error: NetworkConnectionError)
-{
-  Debug.Log("Could not connect to the server: " + error + ", so I am creating a new server");
-  startServer();
-}
-       
-       
-function getHostList () {
  
-        MasterServer.RequestHostList(gameName);
-        Debug.Log("waiting for host list");
-        yield WaitForSeconds(2);
-}
+ function OnDisconnectedFromServer(info : NetworkDisconnection) {
+     Debug.Log("This SERVER OR CLIENT has disconnected from a server");
+ }
+ 
+ function OnFailedToConnect(error: NetworkConnectionError){
+     Debug.Log("Could not connect to server: "+ error);
+ }
+ 
+ 
+ //Server functions called by Unity
+ function OnPlayerConnected(player: NetworkPlayer) {
+     Debug.Log("Player connected from: " + player.ipAddress +":" + player.port);
+ }
+ 
+
+ 
+ function OnPlayerDisconnected(player: NetworkPlayer) {
+     Debug.Log("Player disconnected from: " + player.ipAddress+":" + player.port);
+ }
+ 
+ 
+ function OnFailedToConnectToMasterServer(info: NetworkConnectionError){
+     Debug.Log("Could not connect to master server: "+ info);
+ }
+ 
+ function OnNetworkInstantiate (info : NetworkMessageInfo) {
+     Debug.Log("New object instantiated by " + info.sender);
+ }
