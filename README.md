@@ -1,4 +1,5 @@
-Inspiration
+# Inspiration
+
 We all love pokemon. So we decided to build a virtual environment where you can challenge your friends to pokemon battles. You can choose from a range of available pokemon and use a variety of different moves with a variety of animations.
 
 # How it works
